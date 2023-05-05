@@ -5,7 +5,7 @@ import {userSignUp, userSignIn} from "../api/auth";
 
 function Login(){
 
-    const [showSignup, setShowSignUp] = useState(true);
+    const [showSignup, setShowSignUp] = useState(false);
     
     const [userId, setUserId]= useState("");
     const [password, setPassword]= useState("");
@@ -63,6 +63,7 @@ function Login(){
             console.log(res);
             setError(false);
             setMessage("SignUp successful");
+            window.location.href="/";
         })
         .catch((err)=>{
             if(err.response.status===400){
@@ -83,6 +84,17 @@ function Login(){
             console.log(res);
             setError(false);
             setMessage("Login Successful");
+
+            if(res.data.userType==="ENGINEER"){
+                window.location.href="/engineer";
+            }
+            else if(res.data.userType==="CUSTOMER"){
+                window.location.href="/customer";
+            }else{
+                window.location.href="/admin";
+
+            }
+
         })
         .catch((err)=>{
             if(err.response.status){
@@ -109,10 +121,13 @@ function Login(){
         else{
             setUserName(e.target.value)
         }
-        
-        
-
     }
+
+    const handleSelect =(e)=>{
+        setUserType(e);
+    }
+
+
 
     return <div className="bg-info d-flex justify-content-center align-items-center vh-100" >
 
@@ -151,6 +166,7 @@ function Login(){
                 showSignup && 
                <DropdownButton
                 title={userType}
+                onSelect={handleSelect}
                 id="userType"
                 variant="light"
                 align="end"
