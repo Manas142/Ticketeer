@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import {userSignUp, userSignIn} from "../api/auth";
@@ -14,6 +14,28 @@ function Login(){
     const [userType, setUserType]= useState("CUSTOMER");
     const [message, setMessage] = useState("");
     const [error,setError]=useState(false);
+
+    useEffect(()=>{
+
+        const userType=localStorage.getItem("userType");
+        const token = localStorage.getItem("token");
+
+        if(!token || !userType){
+            return;
+        }
+
+
+        if(userType==="ENGINEER"){
+            window.location.href="/engineer";
+        }
+        else if(userType==="CUSTOMER"){
+            window.location.href="/customer";
+        }else{
+            window.location.href="/admin";
+
+        }
+
+    },[]);
 
 
     const toggleSignup = ()=>{
@@ -84,6 +106,14 @@ function Login(){
             console.log(res);
             setError(false);
             setMessage("Login Successful");
+
+            localStorage.setItem("name",res.data.name);
+            localStorage.setItem("userId",res.data.userId);
+            localStorage.setItem("email",res.data.email);
+            localStorage.setItem("userStatus",res.data.userStatus);
+            localStorage.setItem("token",res.data.accessToken);
+            localStorage.setItem("userType",res.data.userType);
+
 
             if(res.data.userType==="ENGINEER"){
                 window.location.href="/engineer";
