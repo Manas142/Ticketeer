@@ -1,7 +1,12 @@
+import Sidebar from "../components/Sidebar";
+
 function Admin(){
 
     return (
-        <h2> Admin Dashboard </h2>
+        <div>
+            <Sidebar/>
+            <h2> Admin Dashboard </h2>
+        </div>
     );
 }
 
