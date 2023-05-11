@@ -4,6 +4,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import {getAllTickets} from "../api/ticket";
 import {getAllUsers} from "../api/user";
 import MaterialTable from 'material-table'
+import {Modal, Button} from "react-bootstrap";
 
 function Admin(){
 
@@ -11,6 +12,8 @@ function Admin(){
 
     const [ticketDetails,setTicketDetails] = useState([]);
     const [ticketStatusCount, setTicketStatusCount] = useState({});
+    const [selectedCurrTicket, setSelectedCurrTicket] = useState({});
+    const [ticketUpdateModal, setTicketUpdateModal] = useState(false);
 
     const [userDetails,setUserDetails]=useState([]);
 
@@ -69,6 +72,17 @@ function Admin(){
 
 
         setTicketStatusCount({...data});
+    }
+
+
+    const editTicket =(ticketDetail)=>{
+        console.log(ticketDetail);
+        setTicketUpdateModal(true);
+        setSelectedCurrTicket(ticketDetail);
+    }
+
+    const closeTicketUpdateModal =  ()=>{
+        setTicketUpdateModal(false);
     }
 
 
@@ -201,9 +215,13 @@ function Admin(){
 
             sorting:true,
             rowStyle:{
+                cursor:"pointer"
             }
           }}      
         />
+
+
+
 
       </div>
 
@@ -211,6 +229,9 @@ function Admin(){
 
              <div style={{ maxWidth: '100%' }}>
         <MaterialTable
+
+        onRowClick={ (event,rowData)=> editTicket(rowData) }
+
           columns={[
             { title: 'TICKET ID', field: '_id' },
             { title: 'TITLE', field: 'title' },
@@ -228,9 +249,36 @@ function Admin(){
           options={{
             sorting:true,
             rowStyle:{
+                cursor:"pointer"
             }
           }}      
         />
+
+       <Modal show={ticketUpdateModal} onHide={closeTicketUpdateModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Details</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+
+            <form>
+
+                <div className="p-1">
+                    <h5> TicketId : {selectedCurrTicket._id} </h5>
+                </div>
+
+            </form>
+
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeTicketUpdateModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={()=>{}}>
+            Update
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       </div>
 
