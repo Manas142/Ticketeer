@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
-import {getAllTickets} from "../api/ticket";
+import {getAllTickets, updateTicket} from "../api/ticket";
 import {getAllUsers} from "../api/user";
 import MaterialTable from 'material-table'
 import {Modal, Button} from "react-bootstrap";
@@ -83,6 +83,37 @@ function Admin(){
 
     const closeTicketUpdateModal =  ()=>{
         setTicketUpdateModal(false);
+    }
+
+    const onTicketUpdate=(e)=>{
+        
+      const fieldName= e.target.name;
+
+      if(fieldName==='title')
+        selectedCurrTicket.title = e.target.value
+     else if(fieldName==="description")
+        selectedCurrTicket.description=e.target.value
+    else if(fieldName==="status")
+        selectedCurrTicket.status=e.target.value
+    else if(fieldName==="assignee")
+        selectedCurrTicket.assignee=e.target.value
+    else if(fieldName==="ticketPriority")
+        selectedCurrTicket.ticketPriority=e.target.value
+
+        setSelectedCurrTicket({...selectedCurrTicket});
+    }
+
+    const updateTicketFn = (e)=>{
+        e.preventDefault();
+
+        updateTicket(selectedCurrTicket).then((res)=>{
+            console.log("Ticket update successfully");
+            setTicketUpdateModal(false);
+            fetchTickets();
+        })
+        .catch(err=>{
+            console.log(err.message);
+        })
     }
 
 
@@ -261,22 +292,51 @@ function Admin(){
 
         <Modal.Body>
 
-            <form>
+            <form onSubmit={updateTicketFn}>
 
                 <div className="p-1">
-                    <h5> TicketId : {selectedCurrTicket._id} </h5>
+                    <h5 className="card-subtitle mb-2 text-primary">
+                     TicketId : {selectedCurrTicket._id}
+                      </h5>
+
+                    <div className="input-group mb-3">
+                        <span className="input-group-text" > Title </span>
+                        <input type="text" name="title" value={selectedCurrTicket.title} onChange={onTicketUpdate} />
+                    </div>
+
+                     <div className="input-group mb-3">
+                        <span className="input-group-text" > Assignee </span>
+                        <input type="text" name="assignee" value={selectedCurrTicket.assignee} onChange={onTicketUpdate} />
+                    </div>
+
+                       <div className="input-group mb-3">
+                        <span className="input-group-text" > Status </span>
+                        <input type="text" name="status" value={selectedCurrTicket.status} onChange={onTicketUpdate} />
+                    </div>
+
+                         <div className="input-group mb-3">
+                        <textarea type="text" className="md-textarea form-control"
+                         name="description" rows="4" value={selectedCurrTicket.description} onChange={onTicketUpdate} />
+                    </div>
+
+                     <div className="input-group mb-3">
+                        <span className="input-group-text" > Priority </span>
+                        <input type="text" name="ticketPriority" value={selectedCurrTicket.ticketPriority} onChange={onTicketUpdate} />
+                    </div>
+
                 </div>
 
+                     <Button variant="secondary" onClick={closeTicketUpdateModal}>
+            Close
+          </Button>
+          <Button type="submit" variant="primary">
+            Update
+          </Button>
             </form>
 
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeTicketUpdateModal}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={()=>{}}>
-            Update
-          </Button>
+     
         </Modal.Footer>
       </Modal>
 
