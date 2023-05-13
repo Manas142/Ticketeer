@@ -31,7 +31,6 @@ function Admin(){
         .then(res=>{
            setTicketDetails(res.data);
            updateTicketsCount(res.data);
-           console.log(res.data);
         })
         .catch(err=>{
             console.log(err);
@@ -67,7 +66,6 @@ function Admin(){
 
 
     const editTicket =(ticketDetail)=>{
-        console.log(ticketDetail);
         setTicketUpdateModal(true);
         setSelectedCurrTicket(ticketDetail);
     }
@@ -113,7 +111,6 @@ function Admin(){
         getAllUsers()
         .then(res=>{
            setUserDetails(res.data);
-           console.log(res.data);
         })
         .catch(err=>{
             console.log(err);
@@ -131,7 +128,6 @@ function Admin(){
     }
 
     const changeUserDetails=(e)=>{
-        console.log(e.target.value);
 
         if(e.target.name==="status"){
             selectedCurrUser.userStatus=e.target.value;
