@@ -1,141 +1,21 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import {getAllTickets, updateTicket} from "../api/ticket";
 import {getAllUsers, updateUser} from "../api/user";
 import MaterialTable from 'material-table'
 import {Modal, Button} from "react-bootstrap";
 import StatusDashboard from "../components/statusDashboard/statusDashboard";
-import { createTicketsCount } from "../handlers/ticketHandler";
+import useFetchTickets from "../hooks/useFetchTicket";
+import useFetchUsers from "../hooks/useFetchUser";
+import useTicketUpdate from "../hooks/useTicketUpdate";
+import useUsersUpdate from "../hooks/userUserUpdate";
 
 function Admin(){
 
-
-    const [ticketDetails,setTicketDetails] = useState([]);
-    const [ticketStatusCount, setTicketStatusCount] = useState({});
-    const [selectedCurrTicket, setSelectedCurrTicket] = useState({});
-    const [ticketUpdateModal, setTicketUpdateModal] = useState(false);
-
-    const [usersUpdateModal, setUsersUpdateModal] = useState(false);
-    const [selectedCurrUser, setSelectedCurrUser]=useState(false);
-
-    const [userDetails,setUserDetails]=useState([]);
-
-    useEffect(()=>{
-        fetchTickets();
-        fetchUsers();
-    },[])
-
-    const fetchTickets=()=>{
-
-        getAllTickets()
-        .then(res=>{
-           setTicketDetails(res.data);
-           updateTicketsCount(res.data);
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-    }
-
-    const updateTicketsCount=(tickets)=>{
-        const ticketsCount=createTicketsCount(tickets);
-        setTicketStatusCount({...ticketsCount});
-    }
-
-
-    const editTicket =(ticketDetail)=>{
-        setTicketUpdateModal(true);
-        setSelectedCurrTicket(ticketDetail);
-    }
-
-    const closeTicketUpdateModal =  ()=>{
-        setTicketUpdateModal(false);
-    }
-
-    const onTicketUpdate=(e)=>{
-        
-      const fieldName= e.target.name;
-
-      if(fieldName==='title')
-        selectedCurrTicket.title = e.target.value
-     else if(fieldName==="description")
-        selectedCurrTicket.description=e.target.value
-    else if(fieldName==="status")
-        selectedCurrTicket.status=e.target.value
-    else if(fieldName==="assignee")
-        selectedCurrTicket.assignee=e.target.value
-    else if(fieldName==="ticketPriority")
-        selectedCurrTicket.ticketPriority=e.target.value
-
-        setSelectedCurrTicket({...selectedCurrTicket});
-    }
-
-    const updateTicketFn = (e)=>{
-        e.preventDefault();
-
-        updateTicket(selectedCurrTicket).then((res)=>{
-            console.log("Ticket update successfully");
-            setTicketUpdateModal(false);
-            fetchTickets();
-        })
-        .catch(err=>{
-            console.log(err.message);
-        })
-    }
-
-
-    const fetchUsers=()=>{
-
-        getAllUsers()
-        .then(res=>{
-           setUserDetails(res.data);
-        })
-        .catch(err=>{
-            console.log(err);
-        })
-    }
-
-    const closeUsersUpdateModal=()=>{
-        setUsersUpdateModal(false);
-    }
-
-    const editUser=(userDetail)=>{
-        setSelectedCurrUser(userDetail);
-        setUsersUpdateModal(true);
-
-    }
-
-    const changeUserDetails=(e)=>{
-
-        if(e.target.name==="status"){
-            selectedCurrUser.userStatus=e.target.value;
-        }
-
-        setSelectedCurrUser({...selectedCurrUser});
-    }
-
-    const updateUserFn=(e)=>{
-        e.preventDefault();
-        
-        const userData={
-            _id:selectedCurrUser._id,
-            status:selectedCurrUser.userStatus
-        }
-
-
-        updateUser(userData)
-        .then(res=>{
-            if(res.status===200){
-                console.log("User Updated Successfully");
-                setUsersUpdateModal(false);
-            }
-        })
-        .catch(err=>{
-            console.log(err.message);
-        })
-
-    }
+    const [ticketDetails, fetchTickets] = useFetchTickets();
+    const [userDetails, fetchUsers] = useFetchUsers();
+    const {selectedCurrTicket, ticketUpdateModal , editTicket , closeTicketUpdateModal, updateTicketFn, onTicketUpdate} = useTicketUpdate(fetchTickets);
+    const  {usersUpdateModal, selectedCurrUser, closeUsersUpdateModal, editUser, changeUserDetails, updateUserFn} = useUsersUpdate();
 
 
     return (
@@ -149,12 +29,13 @@ function Admin(){
 
                 <div className="container">
                     
-                 <StatusDashboard statusDetails={ticketStatusCount} />
+                 <StatusDashboard ticketDetails={ticketDetails} />
 
                     <br/>            
 
             <div style={{  maxWidth: '100%' }}>
-        <MaterialTable
+                
+             <MaterialTable
           columns={[
             { title: 'USER ID', field: 'userId' },
             { title: 'NAME', field: 'name' },
@@ -337,3 +218,7 @@ function Admin(){
 }
 
 export default Admin;
+
+
+
+

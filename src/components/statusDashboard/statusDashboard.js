@@ -1,11 +1,10 @@
 import { SignalWifiStatusbarNull } from '@mui/icons-material';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import { createTicketsCount } from '../../handlers/ticketHandler';
 
 const StatusDashboard = (props)=>{
 
-    console.log(props.statusDetails)
-
-    const statusDetails= props.statusDetails;
+    const statusDetails = createTicketsCount(props.ticketDetails);
 
             const userName =  localStorage.getItem("name");
             const userType =  localStorage.getItem("userType");
