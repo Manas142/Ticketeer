@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
-import {getAllTickets, updateTicket} from "../api/ticket";
-import {getAllUsers, updateUser} from "../api/user";
 import MaterialTable from 'material-table'
 import {Modal, Button} from "react-bootstrap";
-import StatusDashboard from "../components/statusDashboard/statusDashboard";
+import StatusDashboard from "../components/StatusDashboard/StatusDashboard";
 import useFetchTickets from "../hooks/useFetchTicket";
 import useFetchUsers from "../hooks/useFetchUser";
 import useTicketUpdate from "../hooks/useTicketUpdate";
 import useUsersUpdate from "../hooks/userUserUpdate";
+import TicketsUpdateModal from "../components/TicketUpdateModal/TicketUpdateModal";
+import TicketsTable from '../components/Ticketstable/TicketsTable';
 
 function Admin(){
 
@@ -125,86 +124,9 @@ function Admin(){
       <hr/>
 
              <div style={{ maxWidth: '100%' }}>
-        <MaterialTable
 
-        onRowClick={ (event,rowData)=> editTicket(rowData) }
-
-          columns={[
-            { title: 'TICKET ID', field: '_id' },
-            { title: 'TITLE', field: 'title' },
-            { title: 'DESCRIPTION', field: 'description' },
-            { title: 'REQUESTOR', field: 'requestor' },
-            { title: 'PRIORITY', field: 'ticketPriority' },
-            { title: 'ASSIGNEE', field: 'assignee' },
-            { title: 'STATUS', field: 'status' },
-
-          ]}
-          data={ticketDetails}
-
-          title="TICKET RECORDS"
-
-          options={{
-            sorting:true,
-            rowStyle:{
-                cursor:"pointer"
-            }
-          }}      
-        />
-
-       <Modal show={ticketUpdateModal} onHide={closeTicketUpdateModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Details</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-
-            <form onSubmit={updateTicketFn}>
-
-                <div className="p-1">
-                    <h5 className="card-subtitle mb-2 text-primary">
-                     TicketId : {selectedCurrTicket._id}
-                      </h5>
-
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" > Title </span>
-                        <input type="text" name="title" value={selectedCurrTicket.title} onChange={onTicketUpdate} />
-                    </div>
-
-                     <div className="input-group mb-3">
-                        <span className="input-group-text" > Assignee </span>
-                        <input type="text" name="assignee" value={selectedCurrTicket.assignee} onChange={onTicketUpdate} />
-                    </div>
-
-                       <div className="input-group mb-3">
-                        <span className="input-group-text" > Status </span>
-                        <input type="text" name="status" value={selectedCurrTicket.status} onChange={onTicketUpdate} />
-                    </div>
-
-                         <div className="input-group mb-3">
-                        <textarea type="text" className="md-textarea form-control"
-                         name="description" rows="4" value={selectedCurrTicket.description} onChange={onTicketUpdate} />
-                    </div>
-
-                     <div className="input-group mb-3">
-                        <span className="input-group-text" > Priority </span>
-                        <input type="text" name="ticketPriority" value={selectedCurrTicket.ticketPriority} onChange={onTicketUpdate} />
-                    </div>
-
-                </div>
-
-                     <Button variant="secondary" onClick={closeTicketUpdateModal}>
-            Close
-          </Button>
-          <Button type="submit" variant="primary">
-            Update
-          </Button>
-            </form>
-
-        </Modal.Body>
-        <Modal.Footer>
-     
-        </Modal.Footer>
-      </Modal>
+              <TicketsTable editTicket={editTicket} title={"TICKET RECORDS"}  ticketDetails={ticketDetails}  />
+              <TicketsUpdateModal selectedCurrTicket={selectedCurrTicket} onTicketUpdate={onTicketUpdate} ticketUpdateModal={ticketUpdateModal} closeTicketUpdateModal={closeTicketUpdateModal} updateTicketFn={updateTicketFn} />
 
       </div>
 
