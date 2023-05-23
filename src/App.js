@@ -7,6 +7,7 @@ import Engineer from './pages/Engineer';
 
 import { BrowserRouter as  Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
+import Auth from "../src/hoc/Auth";
 
 function App() {
 
@@ -15,20 +16,14 @@ function App() {
   return (
     <div>
           <ThemeProvider theme={defaultMaterialTheme}>
-
       <Router>
-
         <Routes>
-
           <Route path="/" element={ <Login/> } />
-          <Route path="/customer" element={<Customer/>} />
-          <Route path='/engineer' element={<Engineer/>} />
-          <Route path='/admin' element={<Admin/>} />
-          
+          <Route path="/customer" element={ <Auth> <Customer/> </Auth> } />
+          <Route path='/engineer' element= { <Auth> <Engineer/>  </Auth> } />
+          <Route path='/admin' element={ <Auth> <Admin/> </Auth>} />
         </Routes>
-        
       </Router>
-
       </ThemeProvider>
 
     </div>

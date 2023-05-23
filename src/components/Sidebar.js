@@ -1,12 +1,8 @@
 import {CSidebar,CSidebarNav,CNavTitle,CNavItem,CSidebarToggler,CIcon,CBadge,CSidebarBrand,cilSpeedometer,CNavGroup,cilPuzzle} from "@coreui/react";
 import { Link } from "react-router-dom";
+import { logout } from "../handlers/logoutHandler";
 
 const Sidebar = ()=>{
-
-  const logout=()=>{
-    localStorage.clear();
-    window.location.href="/";
-  }
 
     return(
 

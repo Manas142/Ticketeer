@@ -4,11 +4,15 @@ import useFetchTickets from '../hooks/useFetchTicket';
 import TicketsTable from '../components/Ticketstable/TicketsTable';
 import useTicketUpdate from '../hooks/useTicketUpdate';
 import TicketsUpdateModal from '../components/TicketUpdateModal/TicketUpdateModal';
+import constants from '../utils/constants';
 
 function Engineer(){
 
+
        const [ticketDetails, fetchTickets] =  useFetchTickets();
         const {selectedCurrTicket, ticketUpdateModal , editTicket , closeTicketUpdateModal, updateTicketFn, onTicketUpdate} = useTicketUpdate(fetchTickets);
+
+
 
 
     return (
