@@ -7,20 +7,14 @@ import TicketsTable from '../components/Ticketstable/TicketsTable';
 import useFetchTickets from '../hooks/useFetchTicket';
 import useTicketUpdate from '../hooks/useTicketUpdate';
 import constants from '../utils/constants';
+import useCreateTicket from '../hooks/useCreateTicket';
 
 
 function Customer(){
 
       const [ticketDetails, fetchTickets] =  useFetchTickets();
-        const {selectedCurrTicket, ticketUpdateModal , editTicket , closeTicketUpdateModal, updateTicketFn, onTicketUpdate} = useTicketUpdate(fetchTickets);
-
-
-        const [createTicketModal, setCreateTicketModal] = useState(false);
-
-        const closeCreateTicketUpdateModal = ()=>{
-          setCreateTicketModal(false);
-        }
-
+      const {selectedCurrTicket, ticketUpdateModal , editTicket , closeTicketUpdateModal, updateTicketFn, onTicketUpdate} = useTicketUpdate(fetchTickets);
+      const {createTicketModal , openCreateTicketModal, closeCreateTicketModal} = useCreateTicket();
 
     return (
             <div className="row bg-light" >
@@ -32,17 +26,9 @@ function Customer(){
                 <div className='container'>
                    <StatusDashboard ticketDetails={ticketDetails} />
                     <TicketsTable editTicket={editTicket} title={"TICKETS RAISED BY YOU"} ticketDetails={ticketDetails}  />
-                  
-
-                  <div>
-                    <input className='bg-primary border-white text-white' style={{width:"100%"}} onClick={()=>setCreateTicketModal(true)} type="submit" value="RAISE TICKET"  />
-                  </div>
+                    <input className='bg-primary border-white text-white' style={{width:"100%"}} onClick={openCreateTicketModal} type="submit" value="RAISE TICKET"  />
                   <TicketsUpdateModal selectedCurrTicket={selectedCurrTicket} onTicketUpdate={onTicketUpdate} ticketUpdateModal={ticketUpdateModal} closeTicketUpdateModal={closeTicketUpdateModal} updateTicketFn={updateTicketFn} />
-                   
-                   {
-                     createTicketModal && <TicketCreationModal onClose={closeCreateTicketUpdateModal} /> 
-                   }
-
+                  <TicketCreationModal show={createTicketModal} onClose={closeCreateTicketModal} />
                 </div>
             </div>
             <div>
