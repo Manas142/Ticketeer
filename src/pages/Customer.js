@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import StatusDashboard from '../components/StatusDashboard/StatusDashboard';
 import TicketsUpdateModal from '../components/TicketUpdateModal/TicketUpdateModal';
@@ -8,9 +8,24 @@ import useFetchTickets from '../hooks/useFetchTicket';
 import useTicketUpdate from '../hooks/useTicketUpdate';
 import constants from '../utils/constants';
 import useCreateTicket from '../hooks/useCreateTicket';
+import { useLocation } from 'react-router-dom';
 
 
 function Customer(){
+
+  const location = useLocation();
+
+  useEffect(()=>{
+
+    const path=location.pathname;
+
+    const isCreateTicketTrue = path.split("/")[2]==="createTicket";
+    if(isCreateTicketTrue){
+    openCreateTicketModal();
+    }
+
+
+  },[])
 
       const [ticketDetails, fetchTickets] =  useFetchTickets();
       const {selectedCurrTicket, ticketUpdateModal , editTicket , closeTicketUpdateModal, updateTicketFn, onTicketUpdate} = useTicketUpdate(fetchTickets);

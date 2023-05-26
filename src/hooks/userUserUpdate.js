@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react";
 import { updateUser } from "../api/user";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const useUsersUpdate=()=>{
-
+  const navigate = useNavigate();
+  const location = useLocation();
     const [usersUpdateModal, setUsersUpdateModal] = useState(false);
     const [selectedCurrUser, setSelectedCurrUser]=useState(false);
     
 
     const closeUsersUpdateModal=()=>{
         setUsersUpdateModal(false);
+        const url = `/admin`;
+        navigate(url);  
+    }
+
+    const setUserAndOpenModal=(userDetail)=>{
+ setSelectedCurrUser(userDetail);
+        setUsersUpdateModal(true);
     }
 
     const editUser=(userDetail)=>{
         setSelectedCurrUser(userDetail);
         setUsersUpdateModal(true);
-
+        const url = `${location.pathname}/${userDetail.userId}`;
+        navigate(url);   
     }
 
     const changeUserDetails=(e)=>{
@@ -48,7 +58,7 @@ const useUsersUpdate=()=>{
 
     }
 
-    return {usersUpdateModal, selectedCurrUser, closeUsersUpdateModal, editUser, changeUserDetails, updateUserFn};
+    return {usersUpdateModal, selectedCurrUser,setUserAndOpenModal, closeUsersUpdateModal, editUser, changeUserDetails, updateUserFn};
 }
 
 

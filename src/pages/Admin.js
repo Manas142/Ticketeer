@@ -9,21 +9,47 @@ import useUsersUpdate from "../hooks/userUserUpdate";
 import TicketsUpdateModal from "../components/TicketUpdateModal/TicketUpdateModal";
 import TicketsTable from '../components/Ticketstable/TicketsTable';
 import constants from "../utils/constants";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 function Admin(){
 
-    const [ticketDetails, fetchTickets] = useFetchTickets();
-    const [userDetails, fetchUsers] = useFetchUsers();
-    const {selectedCurrTicket, ticketUpdateModal , editTicket , closeTicketUpdateModal, updateTicketFn, onTicketUpdate} = useTicketUpdate(fetchTickets);
-    const  {usersUpdateModal, selectedCurrUser, closeUsersUpdateModal, editUser, changeUserDetails, updateUserFn} = useUsersUpdate();
+  console.log("inside Admin");
 
+    const location = useLocation();
+        const [userDetails, fetchUsers] = useFetchUsers();
+
+      useEffect(()=>{
+
+            const pathName= location.pathname;
+            const userId = pathName.split('/')[2];
+
+            if(!userId){
+              return;
+            }
+          
+          const user = userDetails.find((user)=>user.userId===userId);
+
+            if(!user){
+              return;
+            }
+
+            setUserAndOpenModal(user);  
+      },[userDetails]);
+
+    const [ticketDetails, fetchTickets] = useFetchTickets();
+    const {selectedCurrTicket, ticketUpdateModal , editTicket , closeTicketUpdateModal, updateTicketFn, onTicketUpdate} = useTicketUpdate(fetchTickets);
+    const  {usersUpdateModal, selectedCurrUser, setUserAndOpenModal, closeUsersUpdateModal, editUser, changeUserDetails, updateUserFn} = useUsersUpdate();
+
+
+    
 
 
     return (
         <div className="row bg-light" >
 
             <div className="col-1">
-            <Sidebar/>
+              <Link to="/admin/utmalik"> <Sidebar/> </Link> 
             </div>
 
             <div className="col my-4">

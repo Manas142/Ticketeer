@@ -20,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={ <Login/> } />
           <Route path="/customer" element={ <Auth> <Customer/> </Auth> } />
+          <Route path="/customer/createTicket" element={ <Auth> <Customer/> </Auth> } />
           <Route path='/engineer' element= { <Auth> <Engineer/>  </Auth> } />
           <Route path='/admin' element={ <Auth> <Admin/> </Auth>} />
           <Route path='/admin/:userId' element={ <Auth> <Admin/> </Auth>} />
