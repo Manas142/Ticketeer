@@ -3,7 +3,7 @@ import StatusDashboard from '../components/statusDashboard/statusDashboard';
 import useFetchTickets from '../hooks/useFetchTicket';
 import TicketsTable from '../components/ticketstable/ticketsTable';
 import useTicketUpdate from '../hooks/useTicketUpdate';
-import TicketsUpdateModal from '../components/ticketUpdateModal/ticketUpdateModal';
+import TicketsUpdateModal from '../components/ticketupdatemodal/ticketupdatemodal';
 import constants from '../utils/constants';
 
 function Engineer(){
