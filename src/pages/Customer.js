@@ -3,7 +3,7 @@ import Sidebar from '../components/Sidebar';
 import StatusDashboard from '../components/statusDashboard/statusDashboard';
 import TicketsUpdateModal from '../components/ticketUpdateModal/ticketUpdateModal';
 import TicketCreationModal from '../components/ticketCreationModal/ticketCreationModal';
-import TicketsTable from '../components/Ticketstable/ticketsTable';
+import TicketsTable from '../components/ticketstable/ticketsTable';
 import useFetchTickets from '../hooks/useFetchTicket';
 import useTicketUpdate from '../hooks/useTicketUpdate';
 import constants from '../utils/constants';
