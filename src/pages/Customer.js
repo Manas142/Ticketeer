@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '../components/Sidebar';
-import StatusDashboard from '../components/StatusDashboard/StatusDashboard';
-import TicketsUpdateModal from '../components/TicketUpdateModal/TicketUpdateModal';
-import TicketCreationModal from '../components/TicketCreationModal/TicketCreationModal';
-import TicketsTable from '../components/Ticketstable/TicketsTable';
+import StatusDashboard from '../components/statusDashboard/statusDashboard';
+import TicketsUpdateModal from '../components/TicketUpdateModal/ticketUpdateModal';
+import TicketCreationModal from '../components/ticketCreationModal/ticketCreationModal';
+import TicketsTable from '../components/Ticketstable/ticketsTable';
 import useFetchTickets from '../hooks/useFetchTicket';
 import useTicketUpdate from '../hooks/useTicketUpdate';
 import constants from '../utils/constants';

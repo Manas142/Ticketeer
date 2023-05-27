@@ -1,9 +1,9 @@
 import Sidebar from '../components/Sidebar';
-import StatusDashboard from '../components/StatusDashboard/StatusDashboard';
+import StatusDashboard from '../components/statusDashboard/statusDashboard';
 import useFetchTickets from '../hooks/useFetchTicket';
-import TicketsTable from '../components/Ticketstable/TicketsTable';
+import TicketsTable from '../components/Ticketstable/ticketsTable';
 import useTicketUpdate from '../hooks/useTicketUpdate';
-import TicketsUpdateModal from '../components/TicketUpdateModal/TicketUpdateModal';
+import TicketsUpdateModal from '../components/TicketUpdateModal/ticketUpdateModal';
 import constants from '../utils/constants';
 
 function Engineer(){

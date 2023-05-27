@@ -1,13 +1,13 @@
 import Sidebar from "../components/Sidebar";
 import MaterialTable from 'material-table'
 import {Modal, Button} from "react-bootstrap";
-import StatusDashboard from "../components/StatusDashboard/StatusDashboard";
+import StatusDashboard from "../components/statusDashboard/statusDashboard";
 import useFetchTickets from "../hooks/useFetchTicket";
 import useFetchUsers from "../hooks/useFetchUser";
 import useTicketUpdate from "../hooks/useTicketUpdate";
 import useUsersUpdate from "../hooks/userUserUpdate";
-import TicketsUpdateModal from "../components/TicketUpdateModal/TicketUpdateModal";
-import TicketsTable from '../components/Ticketstable/TicketsTable';
+import TicketsUpdateModal from "../components/TicketUpdateModal/ticketUpdateModal";
+import TicketsTable from '../components/Ticketstable/ticketsTable';
 import constants from "../utils/constants";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
