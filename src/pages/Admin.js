@@ -6,7 +6,7 @@ import useFetchTickets from "../hooks/useFetchTicket";
 import useFetchUsers from "../hooks/useFetchUser";
 import useTicketUpdate from "../hooks/useTicketUpdate";
 import useUsersUpdate from "../hooks/userUserUpdate";
-import TicketsUpdateModal from "../components/TicketUpdateModal/ticketUpdateModal";
+import TicketsUpdateModal from "../components/ticketUpdateModal/ticketUpdateModal";
 import TicketsTable from '../components/Ticketstable/ticketsTable';
 import constants from "../utils/constants";
 import { Link, useLocation } from "react-router-dom";

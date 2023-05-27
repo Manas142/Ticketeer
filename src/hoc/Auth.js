@@ -1,5 +1,5 @@
-import UnAuthenticated from "../components/UnAuthenticaed/UnAuthenticated";
-import UnAuthorised from "../components/UnAuthorised/UnAuthorised";
+import UnAuthenticated from "../components/unAuthenticaed/UnAuthenticated";
+import UnAuthorised from "../components/unAuthorised/UnAuthorised";
 import constants from "../utils/constants";
 import { useLocation } from "react-router-dom";
 
