@@ -1,11 +1,14 @@
 import { Button, Modal } from "react-bootstrap";
 import fetchDisabledFields from "../../utils/fetchDisabledFieldsData";
-
+import { ThemeContext } from "../../App"; 
+import { useContext } from "react";
 
 function TicketsUpdateModal(props){
 
     const {ticketUpdateModal, closeTicketUpdateModal, updateTicketFn , selectedCurrTicket , onTicketUpdate} = props;
-    
+    const value = useContext(ThemeContext);
+    const theme =  value.theme;
+   
     const disabledFields = fetchDisabledFields();
 
     return   <Modal show={ticketUpdateModal} onHide={closeTicketUpdateModal}>
@@ -13,7 +16,7 @@ function TicketsUpdateModal(props){
           <Modal.Title>Edit Details</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body style={{backgroundColor:(theme==="light"? "white":"black")}} >
 
             <form onSubmit={updateTicketFn}>
 
