@@ -1,26 +1,17 @@
-import { useRef } from "react";
-
-
-function Custom(){
-    
-    const inputRef = useRef(null); 
-
-
-    const onButtonClick=()=>{
-        inputRef.current.focus();
-    }
+import { useRef, useState } from "react";
+import CustomButton from "../components/Commons/Button";
 
 
 
+export default function Custom() {
 
-    return (<div style={{margin:"20px"}}>
-            <input type="text" ref={inputRef} />
-            <input type="button" value="Focus the text input" onClick={onButtonClick} />
-        </div>
+    const inputField= useRef(null);
 
-    )
+  return (
+    <div>
+        <input type="text" ref={inputField} />
+        <CustomButton inputField={inputField} />
+    </div>
 
+  );
 }
-
-
-export default Custom;
