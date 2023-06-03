@@ -5,12 +5,12 @@ import CustomButton from "../components/Commons/Button";
 
 export default function Custom() {
 
-    const inputField= useRef(null);
+    const div= useRef(null);
 
   return (
-    <div>
-        <input type="text" ref={inputField} />
-        <CustomButton inputField={inputField} />
+    <div ref={div}>
+        <input type="text"  />
+        <CustomButton div={div} />
     </div>
 
   );

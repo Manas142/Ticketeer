@@ -4,7 +4,8 @@ import { Button } from "react-bootstrap";
 function CustomButton(props){
 
     function onButtonClick(){
-        props.inputField.current.focus();
+
+        console.log(props.div.current);
     }
 
     return <Button onClick={onButtonClick}>

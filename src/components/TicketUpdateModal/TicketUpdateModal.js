@@ -8,6 +8,8 @@ function TicketsUpdateModal(props){
     const {ticketUpdateModal, closeTicketUpdateModal, updateTicketFn , selectedCurrTicket , onTicketUpdate} = props;
     const value = useContext(ThemeContext);
     const theme =  value.theme;
+
+    console.log(props.ticketsTableRef);
    
     const disabledFields = fetchDisabledFields();
 
