@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { BrowserRouter as  Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
 import Auth from "../src/hoc/Auth";
+import Custom from './pages/custom';
 
 const ThemeContext = React.createContext();
 
@@ -29,6 +30,7 @@ function App() {
           <Route path='/engineer' element= { <Auth> <Engineer/>  </Auth> } />
           <Route path='/admin' element={ <Auth> <Admin/> </Auth>} />
           <Route path='/admin/:userId' element={ <Auth> <Admin/> </Auth>} />
+          <Route path='/custom' element={ <Custom/>} />
         </Routes>
       </Router>
       </ThemeContext.Provider> 
