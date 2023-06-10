@@ -31,6 +31,7 @@ function Engineer(){
             <div className="col my-4">
                 <div className='container'>
                    <StatusDashboard  ticketDetails={ticketDetails} />
+                   debugger;
                     <TicketsTable editTicket={editTicket} title={"TICKETS ASSIGNED TO YOU"}ticketDetails={ticketDetails}  />
                   <TicketsUpdateModal ticketsTableRef={ticketsTable} selectedCurrTicket={selectedCurrTicket} onTicketUpdate={onTicketUpdate} ticketUpdateModal={ticketUpdateModal} closeTicketUpdateModal={closeTicketUpdateModal} updateTicketFn={updateTicketFn} />
                 </div>

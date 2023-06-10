@@ -12,7 +12,7 @@ function TicketCreationModal(props){
         const description = e.target.description.value;
         const priority =parseInt(e.target.priority.value);
 
-        const ticket={title, description, priority};
+        const ticket={title, description, ticketPriority:priority};
         
         createNewTicket(ticket)
         .then(res=>{

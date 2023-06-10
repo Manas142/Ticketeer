@@ -49,7 +49,7 @@ function Admin(){
         <div className="row bg-light" >
 
             <div className="col-1">
-              <Link to="/admin/utmalik"> <Sidebar/> </Link> 
+             <Sidebar/>
             </div>
 
             <div className="col my-4">
