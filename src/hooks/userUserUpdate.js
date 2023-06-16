@@ -49,7 +49,7 @@ const useUsersUpdate=()=>{
         .then(res=>{
             if(res.status===200){
                 console.log("User Updated Successfully");
-                setUsersUpdateModal(false);
+                closeUsersUpdateModal();
             }
         })
         .catch(err=>{

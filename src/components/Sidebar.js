@@ -44,16 +44,11 @@ const Sidebar = ()=>{
 
                     </CNavItem>
 
-                    <div onClick={logout} >
-                      <CNavItem href="#">
+                    <div style={{cursor:"pointer"}} className="d-flex" onClick={logout} >
                           <i className="bi bi-box-arrow-left text-white m-2"></i>
                           <div className="text-decoration-none text-white mx-3">
                             Logout
                           </div>
-                        </CNavItem>
-
-                    
-
                     </div>
 
 
