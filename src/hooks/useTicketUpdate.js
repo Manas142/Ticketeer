@@ -6,10 +6,12 @@ const useTicketUpdate=(fetchTickets)=>{
   
     const [ticketUpdateModal, setTicketUpdateModal] = useState(false);
     const [selectedCurrTicket, setSelectedCurrTicket] = useState({});
+    
+    
 
     const editTicket =(ticketDetail)=>{
         setTicketUpdateModal(true);
-        setSelectedCurrTicket(ticketDetail);
+        setSelectedCurrTicket({...ticketDetail});
     }
 
 
