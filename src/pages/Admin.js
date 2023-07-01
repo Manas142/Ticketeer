@@ -78,7 +78,7 @@ function Admin(){
           title="USER RECORDS"
 
           options={{
-
+            exportButton:true,
             sorting:true,
             filtering:true,
             rowStyle:{

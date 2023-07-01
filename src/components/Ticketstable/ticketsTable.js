@@ -22,6 +22,8 @@ function TicketsTable(props){
           title= {props.title}
 
           options={{
+            exportAllData:true,
+            exportButton:true,
             sorting:true,
             rowStyle:{
                 cursor:"pointer"
