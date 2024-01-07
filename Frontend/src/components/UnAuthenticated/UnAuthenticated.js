@@ -1,4 +1,4 @@
-
+import React from "react";
 import { Link } from "react-router-dom";
 function UnAuthenticated(){
     return <div className="text-center bg-info text-white vh-100 d-flex align-items-center flex-column justify-content-center">
